@@ -5,6 +5,7 @@
  Backdoor is ONLY intended to be used on your own pentesting labs, or with explicit consent from the owner of the property being tested.** 
 
 [![GitHub](https://img.shields.io/github/license/kadzicuh/BackDoor)](LICENSE)
+[![Build Status](https://dev.azure.com/kadzicuh/BackDoor/_apis/build/status/kadzicuh.BackDoor?branchName=main)](https://dev.azure.com/kadzicuh/BackDoor/_build/latest?definitionId=10&branchName=main)
 
  ## 📷 Screenshot:
 ![Screenshot](Screenshot.png)
