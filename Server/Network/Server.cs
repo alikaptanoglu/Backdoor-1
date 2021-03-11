@@ -46,11 +46,15 @@ namespace Server.Network
         {
             foreach (TcpClient _Client in _List_Clients.Values)
             {
-                NetworkStream _Stream = _Client.GetStream();
+                try
+                {
+                    NetworkStream _Stream = _Client.GetStream();
 
-                byte[] _Data_Bytes = Encoding.UTF8.GetBytes(_Data);
+                    byte[] _Data_Bytes = Encoding.UTF8.GetBytes(_Data);
 
-                _Stream.Write(_Data_Bytes, 0x0, _Data_Bytes.Length);
+                    _Stream.Write(_Data_Bytes, 0x0, _Data_Bytes.Length);
+                }
+                catch { continue; }
             }
         }
 
@@ -73,16 +77,21 @@ namespace Server.Network
 
             for (int _ID = 0x0; _ID < _List_Clients.Count; _ID++)
             {
-                NetworkStream _Stream = _List_Clients.Values.ElementAt(_ID).GetStream();
+                try
+                {
+                    NetworkStream _Stream = _List_Clients.Values.ElementAt(_ID).GetStream();
 
-                byte[] _Data = new byte[0x800 * 0x800];
+                    byte[] _Data = new byte[0x800 * 0x800];
 
-                int _Bytes = _Stream.Read(_Data, 0x0, _Data.Length);
+                    int _Bytes = _Stream.Read(_Data, 0x0, _Data.Length);
 
-                _Deserialize.DeserializeObject(Encoding.UTF8.GetString(_Data, 0x0, _Bytes));
+                    _Deserialize.DeserializeObject(Encoding.UTF8.GetString(_Data, 0x0, _Bytes));
 
-                Console.Write($"\n => [ID: {_ID}] {_Deserialize.Data_XML.Data}");
+                    Console.Write($"\n => [ID: {_ID}] {_Deserialize.Data_XML.Data}");
+                }
+                catch { continue; }
             }
+
             Console.Write("\n");
         }
 
